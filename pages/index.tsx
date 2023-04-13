@@ -8,13 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Login } from "../components/Login";
 import styles from "../styles/Home.module.css";
 import { Button } from "@chakra-ui/react";
-import {
-  ConnectWallet,
-  Web3Button,
-  useAddress,
-  useClaimNFT,
-  useContract,
-} from "@thirdweb-dev/react";
+import { useAddress, useClaimNFT, useContract } from "@thirdweb-dev/react";
 
 const Home: NextPage = () => {
   const [paper, setPaper] = useState<PaperEmbeddedWalletSdk>();
@@ -25,6 +19,7 @@ const Home: NextPage = () => {
   );
   const { mutate: claimNft, isLoading, error } = useClaimNFT(nftDrop);
   const address = useAddress();
+  console.log(error);
 
   useEffect(() => {
     const paper = new PaperEmbeddedWalletSdk({

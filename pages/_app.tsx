@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import {
   PaperEmbeddedWalletSdk,
-  UserStatus
+  UserStatus,
 } from "@paperxyz/embedded-wallet-service-sdk";
 import { ThirdwebSDKProvider } from "@thirdweb-dev/react";
 import type { AppProps } from "next/app";
@@ -13,17 +13,13 @@ const activeChain = "mumbai";
 function ThirdwebCustomProvider({ children }: { children: React.ReactNode }) {
   const [signer, setSigner] = useState<any>();
   console.log("signer", signer);
-  const [paper, setPaper] = useState<PaperEmbeddedWalletSdk>();
 
-  useEffect(() => {
+  const fetchUserStatus = useCallback(async () => {
     const paper = new PaperEmbeddedWalletSdk({
       clientId: "a70c4312-02d4-4de1-8979-9e6108ae8273",
       chain: "Mumbai",
     });
-    setPaper(paper);
-  }, []);
 
-  const fetchUserStatus = useCallback(async () => {
     if (!paper) {
       return;
     }
@@ -35,23 +31,19 @@ function ThirdwebCustomProvider({ children }: { children: React.ReactNode }) {
       paperUser.status === UserStatus.LOGGED_IN_WALLET_INITIALIZED
         ? paperUser
         : undefined;
-    console.log("user", user);
 
     const wallet = user?.wallet;
-    console.log("wallet", wallet);
 
     const signer = await wallet?.getEthersJsSigner({
       rpcEndpoint: "https://mumbai.rpc.thirdweb.com",
     });
-    console.log("signer", signer);
 
     setSigner(signer);
-  }, [paper]);
+  }, []);
 
   useEffect(() => {
-    console.log("paper", paper);
     fetchUserStatus();
-  }, [paper, fetchUserStatus]);
+  }, [fetchUserStatus]);
 
   return (
     <ThirdwebSDKProvider
