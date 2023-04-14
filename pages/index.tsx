@@ -75,11 +75,12 @@ const Home: NextPage = () => {
     // } catch (e) {
     //   console.error(`something went wrong sending gasless transaction ${e}`);
     // }
-
-    claimNft({
+    const tx = claimNft({
       to: address, // Use useAddress hook to get current wallet address
       quantity: 1,
     });
+
+    console.log(tx);
   };
 
   return (

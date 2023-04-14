@@ -51,9 +51,13 @@ function ThirdwebCustomProvider({ children }: { children: React.ReactNode }) {
       signer={signer as any}
       sdkOptions={{
         gasless: {
-          biconomy: {
-            apiId: "K_BlLY7J4.5197e8f6-cc60-416e-bc85-f825cfe23a5a", // your Biconomy API Id
-            apiKey: "K_BlLY7J4.5197e8f6-cc60-416e-bc85-f825cfe23a5a", // your Biconomy API Key
+          // biconomy: {
+          //   apiId: "K_BlLY7J4.5197e8f6-cc60-416e-bc85-f825cfe23a5a", // your Biconomy API Id
+          //   apiKey: "K_BlLY7J4.5197e8f6-cc60-416e-bc85-f825cfe23a5a", // your Biconomy API Key
+          // },
+          openzeppelin: {
+            relayerUrl:
+              "https://api.defender.openzeppelin.com/autotasks/8ab1e1c2-e31b-4c3e-9018-d32b6472e146/runs/webhook/50fa10c3-04cc-4b7d-a92e-9208496bb323/BA3XnELUkSqhDhRZ7nMSt2",
           },
         },
       }}
